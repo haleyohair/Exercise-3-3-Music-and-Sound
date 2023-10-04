@@ -1,14 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://sp64y2eqbd63"]
+[gd_scene load_steps=18 format=3 uid="uid://sp64y2eqbd63"]
 
 [ext_resource type="Script" path="res://Brick/Brick_Container.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cfb204qt38vvo" path="res://Paddle/Paddle.tscn" id="2"]
 [ext_resource type="Script" path="res://Ball/Ball_Container.gd" id="3"]
 [ext_resource type="Script" path="res://Game.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://bna1k8dkka5xx" path="res://UI/Pause_Menu.tscn" id="5"]
+[ext_resource type="Script" path="res://Brick/Comet_Container.gd" id="5_ud3w6"]
 [ext_resource type="Script" path="res://Wall/Wall.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://cb6abwxodebx1" path="res://UI/HUD.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d03l3yccdo8fa" path="res://UI/Instructions.tscn" id="8"]
 [ext_resource type="Script" path="res://Effects/Camera.gd" id="9"]
+[ext_resource type="AudioStream" uid="uid://btp0ugbn0d4bk" path="res://Assets/sound (mp3cut.net).mp3" id="10_g50lg"]
+[ext_resource type="AudioStream" uid="uid://b8i376k8m3inr" path="res://Assets/wall (mp3cut.net).wav" id="11_svahx"]
+[ext_resource type="AudioStream" uid="uid://5nlvnm4rou1o" path="res://Assets/paddle (mp3cut.net).wav" id="12_q5bj7"]
+[ext_resource type="AudioStream" uid="uid://bu8y24mrdmqyf" path="res://Assets/die (mp3cut.net).wav" id="13_3qtha"]
+[ext_resource type="AudioStream" uid="uid://d27gp84b0455" path="res://Assets/brick (mp3cut.net).wav" id="14_rgbpb"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(200, 1000)
@@ -25,6 +31,7 @@ script = ExtResource("4")
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Wall_Container/Wall_Left"]
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Container/Wall_Left"]
 position = Vector2(-90, 400)
@@ -35,6 +42,7 @@ position = Vector2(1024, 0)
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Wall_Container/Wall_Right"]
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Container/Wall_Right"]
 position = Vector2(90, 400)
@@ -44,6 +52,7 @@ shape = SubResource("1")
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Wall_Container/Wall_Top"]
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Container/Wall_Top"]
 position = Vector2(512, -90)
@@ -58,6 +67,9 @@ script = ExtResource("1")
 [node name="Paddle" parent="Paddle_Container" instance=ExtResource("2")]
 position = Vector2(512, 540)
 
+[node name="Comet_Container" type="Node2D" parent="."]
+script = ExtResource("5_ud3w6")
+
 [node name="Ball_Container" type="Node2D" parent="."]
 script = ExtResource("3")
 
@@ -70,7 +82,27 @@ visible = false
 visible = false
 
 [node name="Instructions" parent="UI" instance=ExtResource("8")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 script = ExtResource("9")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_g50lg")
+volume_db = -30.666
+autoplay = true
+
+[node name="Wall_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_svahx")
+
+[node name="Paddle_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_q5bj7")
+
+[node name="Die_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_3qtha")
+volume_db = -2.0
+
+[node name="Brick_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_rgbpb")
+volume_db = 2.0
